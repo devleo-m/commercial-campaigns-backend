@@ -4,6 +4,7 @@ import { makeGetAllUsers } from '../../use-cases/users/factories/makeGetAllUsers
 import { makeGetByIdUsers } from '../../use-cases/users/factories/makeGetByIdUsers'
 import { makeUpdateUser } from '../../use-cases/users/factories/makeUpdateUsers'
 import { makeDeleteUser } from '../../use-cases/users/factories/makeDeleteUsers'
+import { getAuthUser } from '../../utils/util'
 import { z } from 'zod'
 
 export class UserController {
@@ -47,6 +48,26 @@ export class UserController {
             })
 
             const params = requestParamSchema.parse(req.params)
+
+            const getByIdUser = makeGetByIdUsers()
+
+            const byIdUser = await getByIdUser.execute(params.id)
+
+            return res.status(200).json({ data: byIdUser})
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async getByIdUserAuth(req: Request, res: Response, next: NextFunction){
+        try {
+            const requestParamSchema = z.object({
+                id: z.coerce.number()
+            })
+
+            const authUser = getAuthUser(req)
+
+            const params = requestParamSchema.parse(authUser)
 
             const getByIdUser = makeGetByIdUsers()
 
