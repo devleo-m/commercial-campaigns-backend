@@ -1,5 +1,5 @@
-import { IUser } from "commercial-campaigns-db/src/interface";
-import { IUserRepository } from "../../repositories/interfaces";
+import { IUserRepository } from '../../repositories/interfaces'
+import { IUser } from 'commercial-campaigns-db/out/interface'
 
 type Output = {
     user: IUser | null

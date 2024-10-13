@@ -3,7 +3,6 @@ import { IUser } from 'commercial-campaigns-db/src/interface'
 import { User } from 'commercial-campaigns-db/src/models'
 
 export class UserRepositoryDatabase implements IUserRepository {
-    
     async getById(where: object): Promise<IUser | null> {
         return await User.findOne({
             where: { ...where }
@@ -15,6 +14,12 @@ export class UserRepositoryDatabase implements IUserRepository {
             raw: true,
             where: { ...where },
             order: orderBy
+        })
+    }
+
+    async getByEmail(email: string): Promise<IUser | null> {
+        return await User.findOne({
+            where: { email }
         })
     }
 

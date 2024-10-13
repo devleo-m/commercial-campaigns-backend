@@ -1,0 +1,311 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Commercial-Campaigns Management API",
+      "description": "API for managing campaigns and users in Commercial-Campaigns.",
+      "contact": {
+        "name": "Leonardo Madeira",
+        "url": "https://github.com/devleo-m"
+      }
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000",
+        "description": "Local server"
+      }
+    ],
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      },
+            "schemas":{
+                "Login": {
+                    "type": "object",
+                    "properties": {
+                        "email": {
+                            "type": "string",
+                            "example": "admin@gmail.com"
+                        },
+                        "password": {
+                            "type": "string",
+                            "example": "root"
+                        }
+                    }
+                },
+                "Auth": {
+                    "type": "object",
+                    "properties": {
+                        "token": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "User": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "name": {
+                            "type": "string",
+                            "example": "Leonardo Madeira"
+                        },
+                        "email": {
+                            "type": "string",
+                            "example": "leonardo@gmail.com"
+                        },
+                        "password": {
+                            "type": "string",
+                            "example": "root"
+                        },
+                        "created_at": {
+                            "type": "string",
+                            "example": "2022-01-01T00:00:00.000Z"
+                        },
+                        "updated_at": {
+                            "type": "string",
+                            "example": "2022-01-01T00:00:00.000Z"
+                        }
+                    }           
+                },
+                "CreateUser": {
+                    "type": "object",
+                    "properties": {
+                        "user": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                            "type": "string",
+                            "example": "Fulano de tal"
+                            },
+                            "email": {
+                            "type": "string",
+                            "example": "fulanodetal@gmail.com"
+                            },
+                            "password": {
+                            "type": "string",
+                            "example": "rootroot"
+                            }
+                        }
+                    }
+                }
+            },
+                "UpdateUser": {
+                "type": "object",
+                    "properties": {
+                        "user": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                            "type": "string",
+                            "example": "Fulano de tal"
+                            },
+                            "email": {
+                            "type": "string",
+                            "example": "fulanodetal@gmail.com"
+                            },
+                            "password": {
+                            "type": "string",
+                            "example": "rootroot"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "summary": "Login",
+                "tags": ["Auth"],
+                "requestBody": {
+                    "description": "Login",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Login"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "summary": "Get all users",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["User"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new user",
+                "tags": ["User"],
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "description": "Create a new user",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "summary": "Get a user",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["User"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                } 
+            },
+            "patch": {
+                "summary": "Update a user",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["User"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update a user",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a user",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["User"],
+                "description": "delete a user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/users/auth-user/{id}": {
+            "get": {
+                "summary": "Get a user",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["User"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

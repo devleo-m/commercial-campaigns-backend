@@ -8,13 +8,13 @@ import { getAuthUser } from '../../utils/util'
 import { z } from 'zod'
 
 export class UserController {
-    static async createUser(req: Request, res: Response, next: NextFunction){
+    static async createUser(req: Request, res: Response, next: NextFunction) {
         try {
             const requestBodySchema = z.object({
                 user: z.object({
                     name: z.string().min(3),
                     email: z.string().email(),
-                    password: z.string().min(6),
+                    password: z.string().min(6)
                 })
             })
             const body = requestBodySchema.parse(req.body)
@@ -41,7 +41,7 @@ export class UserController {
         }
     }
 
-    static async getByIdUser(req: Request, res: Response, next: NextFunction){
+    static async getByIdUser(req: Request, res: Response, next: NextFunction) {
         try {
             const requestParamSchema = z.object({
                 id: z.coerce.number()
@@ -53,13 +53,13 @@ export class UserController {
 
             const byIdUser = await getByIdUser.execute(params.id)
 
-            return res.status(200).json({ data: byIdUser})
+            return res.status(200).json({ data: byIdUser })
         } catch (error) {
             next(error)
         }
     }
 
-    static async getByIdUserAuth(req: Request, res: Response, next: NextFunction){
+    static async getByIdUserAuth(req: Request, res: Response, next: NextFunction) {
         try {
             const requestParamSchema = z.object({
                 id: z.coerce.number()
@@ -73,7 +73,7 @@ export class UserController {
 
             const byIdUser = await getByIdUser.execute(params.id)
 
-            return res.status(200).json({ data: byIdUser})
+            return res.status(200).json({ data: byIdUser })
         } catch (error) {
             next(error)
         }
@@ -102,7 +102,7 @@ export class UserController {
             const updateUser = makeUpdateUser()
 
             const updated = await updateUser.execute(params.id, body.user)
-            
+
             return res.status(200).json({ data: updated })
         } catch (error) {
             next(error)

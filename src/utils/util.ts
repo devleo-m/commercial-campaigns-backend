@@ -5,6 +5,6 @@ export const getAuthUser = (request: Request): IAuthUser => {
     return {
         id: request['authUser'].id,
         name: request['authUser'].name,
-        email: request['authUser'].email,
+        email: request['authUser'].email
     }
 }

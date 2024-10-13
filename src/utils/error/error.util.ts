@@ -38,7 +38,6 @@ export class ErrorUtil {
 
             return returnedError
         } else {
-
             if (error instanceof JsonWebTokenError) {
                 res.status(errorEnum.UNAUTHORIZED)
                 const returnedError = {
