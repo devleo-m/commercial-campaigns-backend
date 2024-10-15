@@ -1,10 +1,7 @@
 import { IUserRepository } from '../../repositories/interfaces'
-import { IUser } from 'commercial-campaigns-db/out/interface'
+import { NotFoundError } from '../../utils/error/errors'
 
-type Output = {
-    success: boolean
-    user?: IUser | null
-};
+type Output = boolean
 
 export class DeleteUserUseCase {
     constructor(
@@ -12,8 +9,14 @@ export class DeleteUserUseCase {
     ) {}
 
     async execute(id: number): Promise<Output> {
-        const user = await this.userRepository.getById({ id })
-        const success = await this.userRepository.delete(id)
-        return { success, user }
+        const userById = await this.userRepository.getById(id)
+
+        if(!userById){
+            throw new NotFoundError('User not found!')
+        }
+
+        const userDeletedSuccess = await this.userRepository.delete(id)
+
+        return userDeletedSuccess
     }
 }
