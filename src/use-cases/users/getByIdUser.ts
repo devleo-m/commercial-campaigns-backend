@@ -1,8 +1,10 @@
 import { IUserRepository } from '../../repositories/interfaces'
-import { IUser } from 'commercial-campaigns-db/out/interface'
+import { NotFoundError } from '../../utils/error/errors'
 
 type Output = {
-    user: IUser | null
+    id: number,
+    name: string,
+    email: string
 }
 
 export class GetByIdUserUseCase {
@@ -11,7 +13,16 @@ export class GetByIdUserUseCase {
     ) {}
 
     async execute(id: number): Promise<Output> {
-        const user = await this.userRepository.getById({ id })
-        return { user }
+        const userById = await this.userRepository.getById(id)
+
+        if(!userById){
+            throw new NotFoundError('User not found!')
+        }
+
+        return {
+            id: userById.id,
+            name: userById.name,
+            email: userById.email
+        }
     }
 }
