@@ -11,17 +11,15 @@ export class UserController {
     static async createUser(req: Request, res: Response, next: NextFunction) {
         try {
             const requestBodySchema = z.object({
-                user: z.object({
-                    name: z.string().min(3),
-                    email: z.string().email(),
-                    password: z.string().min(6)
-                })
+                name: z.string().min(3),
+                email: z.string().email(),
+                password: z.string().min(6) 
             })
             const body = requestBodySchema.parse(req.body)
 
             const createUser = makeCreateUser()
 
-            const userData = await createUser.execute(body.user)
+            const userData = await createUser.execute(body)
 
             return res.status(201).json({ data: userData })
         } catch (error) {
@@ -86,12 +84,11 @@ export class UserController {
             })
 
             const requestBodySchema = z.object({
-                user: z.object({
-                    name: z.string().min(3),
-                    email: z.string().email(),
-                    password: z.string().min(6)
-                })
+                name: z.string().min(3).optional(),
+                email: z.string().email().optional(),
+                password: z.string().min(6).optional()
             })
+
             const params = requestParamSchema.parse(req.params)
             const body = requestBodySchema.parse(req.body)
 
@@ -101,7 +98,7 @@ export class UserController {
 
             const updateUser = makeUpdateUser()
 
-            const updated = await updateUser.execute(params.id, body.user)
+            const updated = await updateUser.execute(params.id, body)
 
             return res.status(200).json({ data: updated })
         } catch (error) {
