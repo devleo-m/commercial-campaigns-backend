@@ -48,7 +48,7 @@ const verifyUser = async (token: string) => {
         return null
     }
 
-    const user = await userRepository.getById({ id: decoded.sub })
+    const user = await userRepository.getById(decoded.sub)
 
     if (!user) {
         return null
