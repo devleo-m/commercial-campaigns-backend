@@ -4,7 +4,7 @@ import { UserController } from '../controllers'
 
 const userRouter = Router()
 
-userRouter.post('/users', verifyJwt, UserController.createUser)
+userRouter.post('/users', UserController.createUser)
 userRouter.get('/users', verifyJwt, UserController.getAllUsers)
 userRouter.get('/users/:id', verifyJwt, UserController.getByIdUser)
 userRouter.patch('/users/:id', verifyJwt, UserController.updateUser)

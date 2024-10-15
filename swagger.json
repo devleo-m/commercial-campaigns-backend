@@ -33,7 +33,7 @@
                         },
                         "password": {
                             "type": "string",
-                            "example": "root"
+                            "example": "rootroot"
                         }
                     }
                 },
@@ -77,44 +77,34 @@
                 "CreateUser": {
                     "type": "object",
                     "properties": {
-                        "user": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
+                        "name": {
                             "type": "string",
                             "example": "Fulano de tal"
-                            },
-                            "email": {
+                        },
+                        "email": {
                             "type": "string",
                             "example": "fulanodetal@gmail.com"
-                            },
-                            "password": {
+                        },
+                        "password": {
                             "type": "string",
                             "example": "rootroot"
-                            }
                         }
                     }
-                }
-            },
+                },
                 "UpdateUser": {
                 "type": "object",
-                    "properties": {
-                        "user": {
-                        "type": "object",
-                        "properties": {
-                            "name": {
-                            "type": "string",
-                            "example": "Fulano de tal"
-                            },
-                            "email": {
-                            "type": "string",
-                            "example": "fulanodetal@gmail.com"
-                            },
-                            "password": {
-                            "type": "string",
-                            "example": "rootroot"
-                            }
-                        }
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Fulano de tal"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "fulanodetal@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "rootroot"
                     }
                 }
             }

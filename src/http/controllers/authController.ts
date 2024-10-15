@@ -15,19 +15,17 @@ export class AuthController {
         const user = await userRepository.getByEmail(email);
 
         if (!user) {
-            return res.status(401).json({ message: 'Invalid credentials' });
+            return res.status(401).json({ message: 'Invalid credentials 1.' });
         }
 
         const isPasswordHashed = user.password.length === 60;
 
         if (!isPasswordHashed) {
-            const hashedPassword = bcrypt.hashSync(user.password, 10);
-            user.password = hashedPassword;
-            await userRepository.update(user.id, user);
+            return res.status(401).json({ message: 'Invalid credentials 2.' });
         }
 
         if (!bcrypt.compareSync(password, user.password)) {
-            return res.status(401).json({ message: 'Invalid credentials' });
+            return res.status(401).json({ message: 'Invalid credentials 3.' });
         }
 
         const token = sign({ sub: user.id, name: user.name, email: user.email }, JWT_SECRET, { expiresIn: '24h' }
