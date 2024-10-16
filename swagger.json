@@ -23,8 +23,8 @@
           "bearerFormat": "JWT"
         }
       },
-            "schemas":{
-                "Login": {
+        "schemas":{
+            "Login": {
                     "type": "object",
                     "properties": {
                         "email": {
@@ -36,16 +36,16 @@
                             "example": "rootroot"
                         }
                     }
-                },
-                "Auth": {
+            },
+            "Auth": {
                     "type": "object",
                     "properties": {
                         "token": {
                             "type": "string"
                         }
                     }
-                },
-                "User": {
+            },
+            "User": {
                     "type": "object",
                     "properties": {
                         "id": {
@@ -73,8 +73,8 @@
                             "example": "2022-01-01T00:00:00.000Z"
                         }
                     }           
-                },
-                "CreateUser": {
+            },
+            "CreateUser": {
                     "type": "object",
                     "properties": {
                         "name": {
@@ -90,8 +90,8 @@
                             "example": "rootroot"
                         }
                     }
-                },
-                "UpdateUser": {
+            },
+            "UpdateUser": {
                 "type": "object",
                 "properties": {
                     "name": {
@@ -105,6 +105,73 @@
                     "password": {
                         "type": "string",
                         "example": "rootroot"
+                    }
+                }
+            },
+            "Campaigns": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Fulano de tal"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "example": "2022-01-01T00:00:00.000Z"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "example": "2022-01-01T00:00:00.000Z"
+                    },
+                    "userId": {
+                        "type": "integer",
+                        "example": 2
+                    }
+                }
+            },
+            "CreateCampaign": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Fulano de tal"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "example": "2025-01-01T00:00:00.000Z"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "example": "2025-05-05T00:00:00.000Z"
+                    },
+                    "userId": {
+                        "type": "integer",
+                        "example": 2
+                    }
+                }
+            },
+            "UpdateCampaign": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Fulano de tal"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "example": "2025-01-01T00:00:00.000Z"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "example": "2025-05-05T00:00:00.000Z"
+                    },
+                    "userId": {
+                        "type": "integer",
+                        "example": 2
                     }
                 }
             }
@@ -293,6 +360,114 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/campaigns": {
+            "get": {
+                "summary": "Get all campaigns",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["Campaign"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Campaign"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["Campaign"],
+                "requestBody": {
+                    "description": "Create a new campaign",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCampaign"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Campaign"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/campaigns/{id}": {
+            "get": {
+                "summary": "Get a campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["Campaign"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Campaign"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update a campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["Campaign"],
+                "requestBody": {
+                    "description": "Update a campaign",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateCampaign"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Campaign"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["Campaign"],
+                "description": "delete a campaign",
+                "responses": {
+                    "204": {
+                        "description": "No Content"
                     }
                 }
             }
