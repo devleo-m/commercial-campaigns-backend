@@ -11,4 +11,3 @@ campaignsRouter.patch('/campaigns/:id', verifyJwt, CampaignsController.updateCam
 campaignsRouter.delete('/campaigns/:id', verifyJwt, CampaignsController.deleteCampaign)
 
 export { campaignsRouter }
-
