@@ -16,14 +16,13 @@ export class CampaignsRepositoryDatabase implements ICampaignsRepository {
     }
 
     async update(id: number, campaignData: UpdateCampaignDto): Promise<ICampaigns> {
-        const [, [updateCampaign]] = await Campaigns.update(Campaigns,
-            {
-                where: { id },
-                returning: true
-            }
-        )
+        const [, [updatedCampaign]] = await Campaigns.update(campaignData, {
+            where: { id },
+            returning: true
+        });
 
-        return updateCampaign    }
+        return updatedCampaign;
+    }
 
     async delete(id: number): Promise<boolean> {
         return !!await Campaigns.destroy({ where: { id } })
