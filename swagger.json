@@ -90,7 +90,7 @@
                             "example": "rootroot"
                         }
                     }
-                },
+            },
             "UpdateUser": {
                 "type": "object",
                 "properties": {
@@ -227,6 +227,73 @@
                     "userId": {
                         "type": "integer",
                         "example": 2
+                    }
+                }
+            },
+            "AdvertiserCommercialCampaignAssociation": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "campaignId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "CommercialId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "example": "2025-01-01T00:00:00.000Z"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "example": "2025-01-01T00:00:00.000Z"
+                    }
+                }
+            },
+            "CreateAdvertiserCommercialCampaignAssociation": {
+                "type": "object",
+                "properties": {
+                    "campaignId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "commercialId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "example": "2025-07-01"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "example": "2025-08-01"
+                    }
+                }
+            },
+            "UpdateAdvertiserCommercialCampaignAssociation": {
+                "type": "object",
+                "properties": {
+                    "campaignId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "commercialId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "example": "2025-07-01"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "example": "2025-08-01"
                     }
                 }
             }
@@ -690,6 +757,141 @@
                     }
                 ],
                 "description": "delete a advertiser commercial",
+                "responses": {
+                    "204": {
+                        "description": "Content deleted"
+                    }
+                }
+            }
+        },
+        "/advertiser-commercials-campaigns": {
+            "get": {
+                "summary": "Get all advertiser commercials campaigns",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercialsCampaigns"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AdvertiserCommercialCampaignAssociation"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new advertiser commercial campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercialsCampaigns"],
+                "requestBody": {
+                    "description": "Create a new advertiser commercial campaign",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateAdvertiserCommercialCampaignAssociation"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                        }
+                    }
+                }
+            }
+        },
+        "/advertiser-commercials-campaigns/{id}": {
+            "get": {
+                "summary": "Get a advertiser commercial campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercialsCampaigns"],
+                "description": "get a advertiser commercial campaign",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdvertiserCommercialCampaignAssociation"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update a advertiser commercial campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercialsCampaigns"],
+                "description": "update a advertiser commercial campaign",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update a advertiser commercial campaign",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateAdvertiserCommercialCampaignAssociation"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdvertiserCommercialCampaignAssociation"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a advertiser commercial campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercialsCampaigns"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "description": "delete a advertiser commercial campaign",
                 "responses": {
                     "204": {
                         "description": "Content deleted"
