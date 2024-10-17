@@ -9,6 +9,7 @@ import { authRouter } from './http/routes/authRoutes'
 import { userRouter } from './http/routes/usersRoutes'
 import { campaignsRouter } from './http/routes/campaignsRoutes'
 import { advertiserCommercialsRouter } from './http/routes/advertiserCommercialsRoutes'
+import { advertiserCommercialCampaignAssociationsRouter } from './http/routes/advertiserCommercialCampaignAssociationsRoutes'
 
 const app = express()
 app.use(express.json())
@@ -24,6 +25,7 @@ app.use('/auth', authRouter)
 app.use('/', userRouter)
 app.use('/', campaignsRouter)
 app.use('/', advertiserCommercialsRouter)
+app.use('/', advertiserCommercialCampaignAssociationsRouter)
 
 app.listen(PORT, () => {
     console.log(`Server running web http://localhost:${PORT}`)
