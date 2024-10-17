@@ -1,6 +1,6 @@
 import { CreateAdvertiserCommercialsDto, IAdvertiserCommercialsRepository, UpdateAdvertiserCommercialsDto } from '../interfaces'
-import { IAdvertiserCommercials } from 'commercial-campaigns-db/src/interface'
-import { AdvertiserCommercials } from 'commercial-campaigns-db/src/models'
+import { IAdvertiserCommercials } from 'commercial-campaigns-db/out/interface'
+import { AdvertiserCommercials } from 'commercial-campaigns-db/out/models'
 
 export class AdvertiserCommercialsRepositoryDatabase implements IAdvertiserCommercialsRepository {
 
