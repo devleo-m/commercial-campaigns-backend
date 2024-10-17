@@ -2,10 +2,10 @@ import { ICampaignsRepository, IUserRepository } from '../../repositories/interf
 import { NotFoundError } from '../../utils/error/errors'
 
 type Input = {
-    name: string
-    startDate: Date
-    endDate: Date
-    userId: number
+    name?: string
+    startDate?: Date
+    endDate?: Date
+    userId?: number
 }
 
 type Output = {
@@ -31,19 +31,19 @@ export class UpdateCampaignUseCase {
 
         const { name, startDate, endDate, userId } = input
 
-        if (name.length < 3) {
+        if (name && name.length < 3) {
             throw new NotFoundError('Invalid name')
         }
 
-        if (startDate > endDate) {
+        if (startDate && endDate && startDate > endDate) {
             throw new NotFoundError('Invalid date')
         }
 
-        if (startDate < new Date()) {
+        if (startDate && startDate < new Date()) {
             throw new NotFoundError('Date must be in the future')
         }
 
-        const verifyUserId = await this.userRepository.getById(userId)
+        const verifyUserId = await this.userRepository.getById(userId || campaignById.userId)
 
         if (!verifyUserId) {
             throw new NotFoundError('User not found')

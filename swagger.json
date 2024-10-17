@@ -72,7 +72,7 @@
                             "type": "string",
                             "example": "2022-01-01T00:00:00.000Z"
                         }
-                    }           
+                }           
             },
             "CreateUser": {
                     "type": "object",
@@ -90,7 +90,7 @@
                             "example": "rootroot"
                         }
                     }
-            },
+                },
             "UpdateUser": {
                 "type": "object",
                 "properties": {
@@ -432,7 +432,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Campaign"
+                                        "$ref": "#/components/schemas/Campaigns"
                                     }
                                 }
                             }
@@ -461,7 +461,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Campaign"
+                                    "$ref": "#/components/schemas/Campaigns"
                                 }
                             }
                         }
@@ -474,13 +474,23 @@
                 "summary": "Get a campaign",
                 "security": [{ "bearerAuth": [] }],
                 "tags": ["Campaign"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Campaign"
+                                    "$ref": "#/components/schemas/Campaigns"
                                 }
                             }
                         }
@@ -491,6 +501,16 @@
                 "summary": "Update a campaign",
                 "security": [{ "bearerAuth": [] }],
                 "tags": ["Campaign"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "description": "Update a campaign",
                     "required": true,
@@ -508,7 +528,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Campaign"
+                                    "$ref": "#/components/schemas/Campaigns"
                                 }
                             }
                         }
@@ -519,6 +539,16 @@
                 "summary": "Delete a campaign",
                 "security": [{ "bearerAuth": [] }],
                 "tags": ["Campaign"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "description": "delete a campaign",
                 "responses": {
                     "204": {

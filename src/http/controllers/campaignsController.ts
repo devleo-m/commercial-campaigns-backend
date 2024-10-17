@@ -11,8 +11,8 @@ export class CampaignsController {
         try {
             const requestBodySchema = z.object({
                 name: z.string().min(3),
-                startDate: z.date(),
-                endDate: z.date(),
+                startDate: z.string().transform((val) => new Date(val)),
+                endDate: z.string().transform((val) => new Date(val)),
                 userId: z.coerce.number()
             })
             const body = requestBodySchema.parse(req.body)
@@ -64,14 +64,16 @@ export class CampaignsController {
             })
 
             const requestBodySchema = z.object({
-                name: z.string().min(3),
-                startDate: z.date(),
-                endDate: z.date(),
-                userId: z.coerce.number()
+                name: z.string().min(3).optional(),
+                startDate: z.string().transform((val) => new Date(val)).optional(),
+                endDate: z.string().transform((val) => new Date(val)).optional(),
+                userId: z.coerce.number().optional()
             })
 
             const params = requestParamSchema.parse(req.params)
             const body = requestBodySchema.parse(req.body)
+
+            console.log("ID capturado:", req.params.id);
 
             if (Object.keys(body).length === 0) {
                 return res.status(400).json({ error: { message: 'No data to update!' } })
