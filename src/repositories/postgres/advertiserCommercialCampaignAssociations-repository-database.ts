@@ -1,6 +1,6 @@
 import { CreateAdvertiserCommercialCampaignAssociationsDto, IAdvertiserCommercialCampaignAssociationsRepository, UpdateAdvertiserCommercialCampaignAssociationsDto } from '../interfaces'
-import { IAdvertiserCommercialCampaignAssociations } from 'commercial-campaigns-db/src/interface'
-import { AdvertiserCommercialCampaignAssociations } from 'commercial-campaigns-db/src/models'
+import { IAdvertiserCommercialCampaignAssociations } from 'commercial-campaigns-db/out/interface'
+import { AdvertiserCommercialCampaignAssociations } from 'commercial-campaigns-db/out/models'
 
 export class AdvertiserCommercialCampaignAssociationsRepositoryDatabase implements IAdvertiserCommercialCampaignAssociationsRepository {
 

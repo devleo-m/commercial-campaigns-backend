@@ -1,6 +1,6 @@
 import { CreateUserDto, IUserRepository, UpdateUserDto } from '../interfaces'
-import { IUser } from 'commercial-campaigns-db/src/interface'
-import { User } from 'commercial-campaigns-db/src/models'
+import { IUser } from 'commercial-campaigns-db/out/interface'
+import { User } from 'commercial-campaigns-db/out/models'
 
 export class UserRepositoryDatabase implements IUserRepository {
     async getById(id: number): Promise<IUser | null> {

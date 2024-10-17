@@ -1,6 +1,6 @@
 import { CreateCampaignDto, ICampaignsRepository, UpdateCampaignDto } from "../interfaces";
-import { ICampaigns } from "commercial-campaigns-db/src/interface";
-import { Campaigns } from "commercial-campaigns-db/src/models";
+import { ICampaigns } from "commercial-campaigns-db/out/interface";
+import { Campaigns } from "commercial-campaigns-db/out/models";
 
 export class CampaignsRepositoryDatabase implements ICampaignsRepository {
     async create(campaignData: CreateCampaignDto): Promise<ICampaigns> {
