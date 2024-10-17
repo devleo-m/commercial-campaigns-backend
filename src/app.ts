@@ -8,6 +8,7 @@ import swaggerDocument from '../swagger.json'
 import { authRouter } from './http/routes/authRoutes'
 import { userRouter } from './http/routes/usersRoutes'
 import { campaignsRouter } from './http/routes/campaignsRoutes'
+import { advertiserCommercialsRouter } from './http/routes/advertiserCommercialsRoutes'
 
 const app = express()
 app.use(express.json())
@@ -22,6 +23,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use('/auth', authRouter)
 app.use('/', userRouter)
 app.use('/', campaignsRouter)
+app.use('/', advertiserCommercialsRouter)
 
 app.listen(PORT, () => {
     console.log(`Server running web http://localhost:${PORT}`)
