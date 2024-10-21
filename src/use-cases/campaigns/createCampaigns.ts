@@ -9,10 +9,7 @@ type Input = {
 }
 
 type Output = {
-    name: string,
-    startDate: Date,
-    endDate: Date,
-    userId: number
+    id: number,
 }
 
 export class CreateCampaignUseCase {
@@ -50,10 +47,7 @@ export class CreateCampaignUseCase {
         })
 
         return {
-            name: newCampaign.name,
-            startDate: newCampaign.startDate,
-            endDate: newCampaign.endDate,
-            userId: newCampaign.userId
+            id: newCampaign.id
         }
     }
 }
