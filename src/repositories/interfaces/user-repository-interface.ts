@@ -1,4 +1,5 @@
 import { IUser } from 'commercial-campaigns-db/out/interface'
+import { Transaction } from 'sequelize'
 
 export interface CreateUserDto {
     name: string
@@ -11,11 +12,12 @@ export interface UpdateUserDto{
     email?: string
     password?: string
 }
+
 export interface IUserRepository {
-    create(userData: CreateUserDto): Promise<IUser>
+    create(userData: CreateUserDto, transaction?: Transaction): Promise<IUser>
     getAll(where: object, orderBy: any[]): Promise<IUser[]>
     getById(id: number): Promise<IUser | null>
     getByEmail(email: string): Promise<IUser | null>
-    update(id: number, userData: UpdateUserDto): Promise<IUser>
-    delete(id: number): Promise<boolean>
+    update(id: number, userData: UpdateUserDto, transaction?: Transaction): Promise<IUser>
+    delete(id: number, transaction?: Transaction): Promise<boolean>
 }
