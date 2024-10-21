@@ -27,8 +27,10 @@ app.use('/', campaignsRouter)
 app.use('/', advertiserCommercialsRouter)
 app.use('/', advertiserCommercialCampaignAssociationsRouter)
 
-app.listen(PORT, () => {
-    console.log(`Server running web http://localhost:${PORT}`)
-})
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => {
+        console.log(`Server running web http://localhost:${PORT}`)
+    })
+}
 
 export { app }

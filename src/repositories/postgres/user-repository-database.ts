@@ -1,6 +1,7 @@
 import { CreateUserDto, IUserRepository, UpdateUserDto } from '../interfaces'
 import { IUser } from 'commercial-campaigns-db/out/interface'
 import { User } from 'commercial-campaigns-db/out/models'
+import { Transaction } from 'sequelize'
 
 export class UserRepositoryDatabase implements IUserRepository {
     async getById(id: number): Promise<IUser | null> {
@@ -15,22 +16,24 @@ export class UserRepositoryDatabase implements IUserRepository {
         return await User.findOne({ where: { email } })
     }
 
-    async create(user: CreateUserDto): Promise<IUser> {
-        return await User.create({ ...user })
+    async create(user: CreateUserDto, transaction?: Transaction): Promise<IUser> {
+        const transactionOptions = transaction ? { transaction } : {}
+        return await User.create({ ...user }, { ...transactionOptions })
     }
 
-    async update(id: number, user: UpdateUserDto): Promise<IUser> {
+    async update(id: number, user: UpdateUserDto, transaction: Transaction): Promise<IUser> {
         const [, [updateUser]] = await User.update(user,
             {
                 where: { id },
-                returning: true
+                returning: true,
+                transaction
             }
         )
 
         return updateUser
     }
 
-    async delete(id: number): Promise<boolean> {
-        return !!await User.destroy({ where: { id } })
+    async delete(id: number, transaction: Transaction): Promise<boolean> {
+        return !!await User.destroy({ where: { id }, transaction })
     }
 }
