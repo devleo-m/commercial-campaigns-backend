@@ -10,10 +10,6 @@ type Input = {
 
 type Output = {
     id: number
-    campaignId: number
-    commercialId: number
-    startDate: Date
-    endDate: Date
 }
 
 export class CreateAdvertiserCommercialCampaignAssociationsUseCase {
@@ -50,10 +46,6 @@ export class CreateAdvertiserCommercialCampaignAssociationsUseCase {
 
         return {
             id: advertiserCommercialCampaignAssociations.id,
-            campaignId: advertiserCommercialCampaignAssociations.campaignId,
-            commercialId: advertiserCommercialCampaignAssociations.commercialId,
-            startDate: advertiserCommercialCampaignAssociations.startDate,
-            endDate: advertiserCommercialCampaignAssociations.endDate
         }
     }
 }
