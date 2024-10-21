@@ -1,18 +1,18 @@
-import supertest from 'supertest'
-import { app } from '../src/app'
+import supertest from 'supertest';
+import { app } from '../src/app';
 import { sign } from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import { UserRepositoryDatabase } from '../src/repositories/postgres'
 
-dotenv.config()
+dotenv.config();
 
-const request = supertest(app)
+const request = supertest(app);
 
 describe('Testes CRUD usuarios', () => {
-    let token = ''
-    let userRepository
-    let userJestId: number
-    let userJestEmail: string
+    let token = '';
+    let userRepository;
+    let userJestId: number;
+    let userJestEmail: string;
 
     beforeAll(async () => {
         userRepository = new UserRepositoryDatabase();
@@ -23,7 +23,12 @@ describe('Testes CRUD usuarios', () => {
             operatorId: 1
         };
 
-        token = sign(payload, process.env.JWT_SECRET as string, { expiresIn: '1h' })
+        token = sign(payload, process.env.JWT_SECRET as string, { expiresIn: '1h' });
+    });
+
+    afterEach(async () => {
+        jest.clearAllMocks();
+        jest.restoreAllMocks();
     });
 
     test('Deve criar um usuario', async () => {
@@ -73,6 +78,22 @@ describe('Testes CRUD usuarios', () => {
 
         expect(responseCreate.status).toBe(500)
     })
+
+    test('Deve retornar um erro ao tentar criar um usuario com email invalido', async () => {
+        const createNewUser = {
+            name: 'Teste',
+            email: 'teste',
+            password: '123456'
+        }
+
+        const responseCreate = await request
+            .post('/users')
+            .set('Authorization', `Bearer ${token}`)
+            .send(createNewUser)
+
+        expect(responseCreate.status).toBe(500)
+    })
+
 
     test('Deve retornar um erro ao tentar criar um usuario sem nome', async () => {
         const createNewUser = {
@@ -281,6 +302,14 @@ describe('Testes CRUD usuarios', () => {
         const responseDelete = await request
             .delete(`/users/99999999`)
             .set('Authorization', `Bearer ${token}`)
+
+        expect(responseDelete.status).toBe(500)
+    })
+
+    test('Deve retornar um erro ao tentar deletar um usuario com token invalido', async () => {
+        const responseDelete = await request
+            .delete(`/users/${userJestId}`)
+            .set('Authorization', `Bearer 123456`)
 
         expect(responseDelete.status).toBe(500)
     })
