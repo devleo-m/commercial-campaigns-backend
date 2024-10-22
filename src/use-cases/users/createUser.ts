@@ -11,9 +11,7 @@ type Input = {
 }
 
 type Output = {
-    id: number,
-    name: string,
-    email: string
+    id: number
 }
 
 export const createSequelizeTransaction = async () => {
@@ -54,9 +52,7 @@ export class CreateUserUseCase {
 
             await transaction.commit()
             return {
-                id: newUser.id,
-                name: newUser.name,
-                email: newUser.email
+                id: newUser.id
             }
         } catch (error) {
             await transaction.rollback()

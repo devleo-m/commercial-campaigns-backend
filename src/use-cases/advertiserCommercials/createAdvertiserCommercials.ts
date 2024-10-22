@@ -9,9 +9,6 @@ type Input = {
 
 type Output = {
     id: number
-    name: string
-    color: string
-    userId: number
 }
 
 export class CreateAdvertiserCommercialsUseCase {
@@ -44,10 +41,7 @@ export class CreateAdvertiserCommercialsUseCase {
         })
 
         return {
-            id: newAdvertiserCommercials.id,
-            name: newAdvertiserCommercials.name,
-            color: newAdvertiserCommercials.color,
-            userId: newAdvertiserCommercials.userId
+            id: newAdvertiserCommercials.id
         }
     }
 }
