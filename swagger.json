@@ -1,0 +1,903 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Commercial-Campaigns Management API",
+      "description": "API for managing campaigns and users in Commercial-Campaigns.",
+      "contact": {
+        "name": "Leonardo Madeira",
+        "url": "https://github.com/devleo-m"
+      }
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000",
+        "description": "Local server"
+      }
+    ],
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      },
+        "schemas":{
+            "Login": {
+                    "type": "object",
+                    "properties": {
+                        "email": {
+                            "type": "string",
+                            "example": "admin@gmail.com"
+                        },
+                        "password": {
+                            "type": "string",
+                            "example": "rootroot"
+                        }
+                    }
+            },
+            "Auth": {
+                    "type": "object",
+                    "properties": {
+                        "token": {
+                            "type": "string"
+                        }
+                    }
+            },
+            "User": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "name": {
+                            "type": "string",
+                            "example": "Leonardo Madeira"
+                        },
+                        "email": {
+                            "type": "string",
+                            "example": "leonardo@gmail.com"
+                        },
+                        "password": {
+                            "type": "string",
+                            "example": "root"
+                        },
+                        "created_at": {
+                            "type": "string",
+                            "example": "2022-01-01T00:00:00.000Z"
+                        },
+                        "updated_at": {
+                            "type": "string",
+                            "example": "2022-01-01T00:00:00.000Z"
+                        }
+                }           
+            },
+            "CreateUser": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "example": "Fulano de tal"
+                        },
+                        "email": {
+                            "type": "string",
+                            "example": "fulanodetal@gmail.com"
+                        },
+                        "password": {
+                            "type": "string",
+                            "example": "rootroot"
+                        }
+                    }
+            },
+            "UpdateUser": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Fulano de tal"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "fulanodetal@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "rootroot"
+                    }
+                }
+            },
+            "Campaigns": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Fulano de tal"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "example": "2022-01-01T00:00:00.000Z"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "example": "2022-01-01T00:00:00.000Z"
+                    },
+                    "userId": {
+                        "type": "integer",
+                        "example": 2
+                    }
+                }
+            },
+            "CreateCampaign": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Fulano de tal"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "example": "2025-01-01T00:00:00.000Z"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "example": "2025-05-05T00:00:00.000Z"
+                    },
+                    "userId": {
+                        "type": "integer",
+                        "example": 2
+                    }
+                }
+            },
+            "UpdateCampaign": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Fulano de tal"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "example": "2025-01-01T00:00:00.000Z"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "example": "2025-05-05T00:00:00.000Z"
+                    },
+                    "userId": {
+                        "type": "integer",
+                        "example": 2
+                    }
+                }
+            },
+            "AdvertiserCommercials": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Fulano de tal"
+                    },
+                    "color": {
+                        "type": "string",
+                        "example": "red"
+                    },
+                    "userId": {
+                        "type": "integer",
+                        "example": 2
+                    }
+                }
+            },
+            "CreateAdvertiserCommercials": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Fulano de tal"
+                    },
+                    "color": {
+                        "type": "string",
+                        "example": "red"
+                    },
+                    "userId": {
+                        "type": "integer",
+                        "example": 2
+                    }
+                }
+            },
+            "UpdateAdvertiserCommercials": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Fulano de tal"
+                    },
+                    "color": {
+                        "type": "string",
+                        "example": "red"
+                    },
+                    "userId": {
+                        "type": "integer",
+                        "example": 2
+                    }
+                }
+            },
+            "AdvertiserCommercialCampaignAssociation": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "campaignId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "CommercialId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "example": "2025-01-01T00:00:00.000Z"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "example": "2025-01-01T00:00:00.000Z"
+                    }
+                }
+            },
+            "CreateAdvertiserCommercialCampaignAssociation": {
+                "type": "object",
+                "properties": {
+                    "campaignId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "commercialId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "example": "2025-07-01"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "example": "2025-08-01"
+                    }
+                }
+            },
+            "UpdateAdvertiserCommercialCampaignAssociation": {
+                "type": "object",
+                "properties": {
+                    "campaignId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "commercialId": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "example": "2025-07-01"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "example": "2025-08-01"
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "summary": "Login",
+                "tags": ["Auth"],
+                "requestBody": {
+                    "description": "Login",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Login"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "summary": "Get all users",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["User"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new user",
+                "tags": ["User"],
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "description": "Create a new user",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "summary": "Get a user",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["User"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                } 
+            },
+            "patch": {
+                "summary": "Update a user",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["User"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update a user",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a user",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["User"],
+                "description": "delete a user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/users/auth-user/{id}": {
+            "get": {
+                "summary": "Get a user",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["User"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/campaigns": {
+            "get": {
+                "summary": "Get all campaigns",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["Campaign"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Campaigns"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["Campaign"],
+                "requestBody": {
+                    "description": "Create a new campaign",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCampaign"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Campaigns"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/campaigns/{id}": {
+            "get": {
+                "summary": "Get a campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["Campaign"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Campaigns"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update a campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["Campaign"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update a campaign",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateCampaign"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Campaigns"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["Campaign"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "description": "delete a campaign",
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/advertiser-commercials":{
+            "get": {
+                "summary": "Get all advertiser commercials",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercial"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AdvertiserCommercials"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new advertiser commercial",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercial"],
+                "requestBody": {
+                    "description": "Create a new advertiser commercial",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateAdvertiserCommercials"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateAdvertiserCommercials"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/advertiser-commercials/{id}": {
+            "get": {
+                "summary": "Get a advertiser commercial",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercial"],
+                "description": "get a advertiser commercial",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdvertiserCommercials"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update a advertiser commercial",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercial"],
+                "description": "update a advertiser commercial",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update a advertiser commercial",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateAdvertiserCommercials"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdvertiserCommercials"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a advertiser commercial",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercial"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "description": "delete a advertiser commercial",
+                "responses": {
+                    "204": {
+                        "description": "Content deleted"
+                    }
+                }
+            }
+        },
+        "/advertiser-commercials-campaigns": {
+            "get": {
+                "summary": "Get all advertiser commercials campaigns",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercialsCampaigns"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AdvertiserCommercialCampaignAssociation"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new advertiser commercial campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercialsCampaigns"],
+                "requestBody": {
+                    "description": "Create a new advertiser commercial campaign",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateAdvertiserCommercialCampaignAssociation"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                        }
+                    }
+                }
+            }
+        },
+        "/advertiser-commercials-campaigns/{id}": {
+            "get": {
+                "summary": "Get a advertiser commercial campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercialsCampaigns"],
+                "description": "get a advertiser commercial campaign",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdvertiserCommercialCampaignAssociation"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update a advertiser commercial campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercialsCampaigns"],
+                "description": "update a advertiser commercial campaign",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update a advertiser commercial campaign",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateAdvertiserCommercialCampaignAssociation"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdvertiserCommercialCampaignAssociation"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a advertiser commercial campaign",
+                "security": [{ "bearerAuth": [] }],
+                "tags": ["AdvertiserCommercialsCampaigns"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "description": "delete a advertiser commercial campaign",
+                "responses": {
+                    "204": {
+                        "description": "Content deleted"
+                    }
+                }
+            }
+        }
+    }
+}
